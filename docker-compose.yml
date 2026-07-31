@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .                    # 현재 디렉터리의 Dockerfile 로 이미지 빌드
+    image: skala-shopping:1.0
+    container_name: skala-shop
+    ports:
+      - "8080:8080"
+    environment:
+      - JWT_SECRET=U0tBTEEtU0hPUC1KV1QtU0VDUkVULUtFWS0yMDI2LUtFRVAtVEhJUy1TQUZFISE=

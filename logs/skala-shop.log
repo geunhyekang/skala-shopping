@@ -294,3 +294,8 @@ This generated password is for development use only. Your security configuration
 2026-07-31T15:31:59.629+09:00  INFO 37607 --- [skala-shopping] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2026-07-31T15:31:59.630+09:00  INFO 37607 --- [skala-shopping] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 2026-07-31T15:31:59.685+09:00  WARN 37607 --- [skala-shopping] [http-nio-8080-exec-1] c.s.s.exception.GlobalExceptionHandler   : BusinessException: PRODUCT_NOT_FOUND /api/products/999
+2026-07-31T15:38:00.968+09:00  INFO 37607 --- [skala-shopping] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-31T15:38:00.984+09:00  INFO 37607 --- [skala-shopping] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-07-31T15:38:00.989+09:00  INFO 37607 --- [skala-shopping] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-31T15:38:00.996+09:00  INFO 37607 --- [skala-shopping] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-07-31T15:38:00.998+09:00  INFO 37607 --- [skala-shopping] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
