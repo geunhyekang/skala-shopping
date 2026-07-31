@@ -1,0 +1,32 @@
+spring: #들여쓰기 안 하면 오류뜸 조심하삼~~ 들여쓰기로 계층구조를 표현함 
+  application:
+    name: skala-shopping
+  datasource:
+    url: jdbc:h2:mem:shopdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+    defer-datasource-initialization: true
+    show-sql: true            # JPA가 실행하는 SQL을 콘솔에서 눈으로 확인합니다.
+    properties:
+      hibernate:
+        format_sql: true      # 출력되는 SQL을 읽기 좋게 줄바꿈합니다.
+
+server:
+  port: 8080
+
+jwt:
+  # 실습용 기본 키입니다. 운영 환경에서는 JWT_SECRET 환경 변수로 교체합니다.
+  secret: ${JWT_SECRET:U0tBTEEtU0hPUC1KV1QtU0VDUkVULUtFWS0yMDI2LUtFRVAtVEhJUy1TQUZFISE=}
+  expiration-minutes: 60
+
+logging:
+  level:
+    root: info                 # 전체 기본 레벨: INFO 이상만 출력
+    com.skala.shop: debug      # 우리 패키지만 DEBUG까지 출력 (개발용)
+  file:
+    name: logs/skala-shop.log  # 콘솔과 동시에 파일로도 기록 (logs 디렉터리 자동 생성)
