@@ -40,6 +40,12 @@ public class SecurityConfig {
                     // 회원가입과 로그인은 POST 요청만 공개합니다.
                     .requestMatchers(HttpMethod.POST, "/api/customers").permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/customers/login").permitAll()
+                    .requestMatchers(
+                        "/swagger-ui/**",
+                        "/swagger-ui.html",
+                        "/v3/api-docs/**",
+                        "/v3/api-docs.yaml"
+                    ).permitAll()
                     .anyRequest().authenticated())
             .exceptionHandling(exception -> exception
                     .authenticationEntryPoint(authenticationEntryPoint))
