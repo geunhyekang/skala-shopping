@@ -299,3 +299,306 @@ This generated password is for development use only. Your security configuration
 2026-07-31T15:38:00.989+09:00  INFO 37607 --- [skala-shopping] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-07-31T15:38:00.996+09:00  INFO 37607 --- [skala-shopping] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2026-07-31T15:38:00.998+09:00  INFO 37607 --- [skala-shopping] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-07-31T16:57:30.704+09:00  INFO 45625 --- [skala-shopping] [main] c.s.s.SkalaShoppingApplication           : Starting SkalaShoppingApplication using Java 21.0.11 with PID 45625 (/Users/geunhye/Skala_shop/skala-shopping/build/classes/java/main started by geunhye in /Users/geunhye/Skala_shop/skala-shopping)
+2026-07-31T16:57:30.706+09:00  INFO 45625 --- [skala-shopping] [main] c.s.s.SkalaShoppingApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-07-31T16:57:30.942+09:00  INFO 45625 --- [skala-shopping] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-31T16:57:30.966+09:00  INFO 45625 --- [skala-shopping] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 21 ms. Found 3 JPA repository interfaces.
+2026-07-31T16:57:31.185+09:00  INFO 45625 --- [skala-shopping] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-07-31T16:57:31.193+09:00  INFO 45625 --- [skala-shopping] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-31T16:57:31.193+09:00  INFO 45625 --- [skala-shopping] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-31T16:57:31.215+09:00  INFO 45625 --- [skala-shopping] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 494 ms
+2026-07-31T16:57:31.287+09:00  INFO 45625 --- [skala-shopping] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-31T16:57:31.317+09:00  INFO 45625 --- [skala-shopping] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-31T16:57:31.499+09:00  INFO 45625 --- [skala-shopping] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-31T16:57:31.516+09:00  INFO 45625 --- [skala-shopping] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-31T16:57:31.587+09:00  INFO 45625 --- [skala-shopping] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:shopdb user=SA
+2026-07-31T16:57:31.588+09:00  INFO 45625 --- [skala-shopping] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-31T16:57:31.613+09:00  INFO 45625 --- [skala-shopping] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:shopdb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SHOPDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-31T16:57:32.062+09:00  INFO 45625 --- [skala-shopping] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-31T16:57:32.083+09:00  INFO 45625 --- [skala-shopping] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-31T16:57:32.115+09:00  INFO 45625 --- [skala-shopping] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-31T16:57:32.239+09:00  WARN 45625 --- [skala-shopping] [main] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 9358f9a0-ca3d-4c88-848c-a740ff0e9068
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-07-31T16:57:32.242+09:00  INFO 45625 --- [skala-shopping] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-07-31T16:57:32.407+09:00  WARN 45625 --- [skala-shopping] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-07-31T16:57:32.408+09:00  INFO 45625 --- [skala-shopping] [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-31T16:57:32.409+09:00  INFO 45625 --- [skala-shopping] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-07-31T16:57:32.410+09:00  INFO 45625 --- [skala-shopping] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-07-31T16:57:32.414+09:00  INFO 45625 --- [skala-shopping] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-07-31T16:57:32.418+09:00 ERROR 45625 --- [skala-shopping] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2026-07-31T16:57:46.938+09:00  INFO 45690 --- [skala-shopping] [Test worker] c.s.s.SkalaShoppingApplicationTests      : Starting SkalaShoppingApplicationTests using Java 21.0.11 with PID 45690 (started by geunhye in /Users/geunhye/Skala_shop/skala-shopping)
+2026-07-31T16:57:46.940+09:00  INFO 45690 --- [skala-shopping] [Test worker] c.s.s.SkalaShoppingApplicationTests      : No active profile set, falling back to 1 default profile: "default"
+2026-07-31T16:57:47.154+09:00  INFO 45690 --- [skala-shopping] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-31T16:57:47.175+09:00  INFO 45690 --- [skala-shopping] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 18 ms. Found 3 JPA repository interfaces.
+2026-07-31T16:57:47.350+09:00  INFO 45690 --- [skala-shopping] [Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-31T16:57:47.366+09:00  INFO 45690 --- [skala-shopping] [Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-31T16:57:47.493+09:00  INFO 45690 --- [skala-shopping] [Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-31T16:57:47.503+09:00  INFO 45690 --- [skala-shopping] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-31T16:57:47.559+09:00  INFO 45690 --- [skala-shopping] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:shopdb user=SA
+2026-07-31T16:57:47.560+09:00  INFO 45690 --- [skala-shopping] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-31T16:57:47.579+09:00  INFO 45690 --- [skala-shopping] [Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:shopdb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SHOPDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-31T16:57:47.928+09:00  INFO 45690 --- [skala-shopping] [Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-31T16:57:47.948+09:00  INFO 45690 --- [skala-shopping] [Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-31T16:57:47.984+09:00  INFO 45690 --- [skala-shopping] [Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-31T16:57:48.118+09:00  WARN 45690 --- [skala-shopping] [Test worker] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: b27ae107-73a5-45df-a284-151de57c17e9
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-07-31T16:57:48.122+09:00  INFO 45690 --- [skala-shopping] [Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-07-31T16:57:48.336+09:00  INFO 45690 --- [skala-shopping] [Test worker] c.s.s.SkalaShoppingApplicationTests      : Started SkalaShoppingApplicationTests in 1.5 seconds (process running for 2.018)
+2026-07-31T16:57:48.596+09:00  INFO 45690 --- [skala-shopping] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-31T16:57:48.598+09:00  INFO 45690 --- [skala-shopping] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-07-31T16:57:48.598+09:00  INFO 45690 --- [skala-shopping] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-07-31T16:57:53.704+09:00  INFO 45733 --- [skala-shopping] [main] c.s.s.SkalaShoppingApplication           : Starting SkalaShoppingApplication using Java 21.0.11 with PID 45733 (/Users/geunhye/Skala_shop/skala-shopping/build/classes/java/main started by geunhye in /Users/geunhye/Skala_shop/skala-shopping)
+2026-07-31T16:57:53.705+09:00  INFO 45733 --- [skala-shopping] [main] c.s.s.SkalaShoppingApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-07-31T16:57:53.945+09:00  INFO 45733 --- [skala-shopping] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-31T16:57:53.964+09:00  INFO 45733 --- [skala-shopping] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 3 JPA repository interfaces.
+2026-07-31T16:57:54.152+09:00  INFO 45733 --- [skala-shopping] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-07-31T16:57:54.159+09:00  INFO 45733 --- [skala-shopping] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-31T16:57:54.159+09:00  INFO 45733 --- [skala-shopping] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-31T16:57:54.174+09:00  INFO 45733 --- [skala-shopping] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 457 ms
+2026-07-31T16:57:54.231+09:00  INFO 45733 --- [skala-shopping] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-31T16:57:54.251+09:00  INFO 45733 --- [skala-shopping] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-31T16:57:54.378+09:00  INFO 45733 --- [skala-shopping] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-31T16:57:54.390+09:00  INFO 45733 --- [skala-shopping] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-31T16:57:54.444+09:00  INFO 45733 --- [skala-shopping] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:shopdb user=SA
+2026-07-31T16:57:54.444+09:00  INFO 45733 --- [skala-shopping] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-31T16:57:54.463+09:00  INFO 45733 --- [skala-shopping] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:shopdb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SHOPDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-31T16:57:54.800+09:00  INFO 45733 --- [skala-shopping] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-31T16:57:54.818+09:00  INFO 45733 --- [skala-shopping] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-31T16:57:54.846+09:00  INFO 45733 --- [skala-shopping] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-31T16:57:54.958+09:00  WARN 45733 --- [skala-shopping] [main] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 82245375-b361-477c-a554-e6febbf0265c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-07-31T16:57:54.960+09:00  INFO 45733 --- [skala-shopping] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-07-31T16:57:55.104+09:00  WARN 45733 --- [skala-shopping] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-07-31T16:57:55.104+09:00  INFO 45733 --- [skala-shopping] [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-31T16:57:55.106+09:00  INFO 45733 --- [skala-shopping] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-07-31T16:57:55.107+09:00  INFO 45733 --- [skala-shopping] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-07-31T16:57:55.111+09:00  INFO 45733 --- [skala-shopping] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-07-31T16:57:55.115+09:00 ERROR 45733 --- [skala-shopping] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2026-07-31T16:58:19.376+09:00  INFO 45794 --- [skala-shopping] [main] c.s.s.SkalaShoppingApplication           : Starting SkalaShoppingApplication using Java 21.0.11 with PID 45794 (/Users/geunhye/Skala_shop/skala-shopping/build/classes/java/main started by geunhye in /Users/geunhye/Skala_shop/skala-shopping)
+2026-07-31T16:58:19.377+09:00  INFO 45794 --- [skala-shopping] [main] c.s.s.SkalaShoppingApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-07-31T16:58:19.583+09:00  INFO 45794 --- [skala-shopping] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-31T16:58:19.600+09:00  INFO 45794 --- [skala-shopping] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 3 JPA repository interfaces.
+2026-07-31T16:58:19.784+09:00  INFO 45794 --- [skala-shopping] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-07-31T16:58:19.790+09:00  INFO 45794 --- [skala-shopping] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-31T16:58:19.790+09:00  INFO 45794 --- [skala-shopping] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-31T16:58:19.805+09:00  INFO 45794 --- [skala-shopping] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 415 ms
+2026-07-31T16:58:19.864+09:00  INFO 45794 --- [skala-shopping] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-31T16:58:19.886+09:00  INFO 45794 --- [skala-shopping] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-31T16:58:20.011+09:00  INFO 45794 --- [skala-shopping] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-31T16:58:20.022+09:00  INFO 45794 --- [skala-shopping] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-31T16:58:20.077+09:00  INFO 45794 --- [skala-shopping] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:shopdb user=SA
+2026-07-31T16:58:20.077+09:00  INFO 45794 --- [skala-shopping] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-31T16:58:20.097+09:00  INFO 45794 --- [skala-shopping] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:shopdb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SHOPDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-31T16:58:20.450+09:00  INFO 45794 --- [skala-shopping] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-31T16:58:20.469+09:00  INFO 45794 --- [skala-shopping] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-31T16:58:20.497+09:00  INFO 45794 --- [skala-shopping] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-31T16:58:20.601+09:00  WARN 45794 --- [skala-shopping] [main] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: c1137537-0cdd-45db-8d63-194e3e0c271c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-07-31T16:58:20.604+09:00  INFO 45794 --- [skala-shopping] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-07-31T16:58:20.749+09:00  INFO 45794 --- [skala-shopping] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-07-31T16:58:20.751+09:00  INFO 45794 --- [skala-shopping] [main] c.s.s.SkalaShoppingApplication           : Started SkalaShoppingApplication in 1.528 seconds (process running for 1.644)
+2026-07-31T16:58:28.957+09:00  INFO 45794 --- [skala-shopping] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-31T16:58:28.958+09:00  INFO 45794 --- [skala-shopping] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-31T16:58:28.959+09:00  INFO 45794 --- [skala-shopping] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-07-31T17:00:07.297+09:00  WARN 45794 --- [skala-shopping] [http-nio-8080-exec-6] c.s.s.exception.GlobalExceptionHandler   : OptimisticLockingFailure: /api/customers/order
+2026-07-31T17:00:07.297+09:00  WARN 45794 --- [skala-shopping] [http-nio-8080-exec-7] c.s.s.exception.GlobalExceptionHandler   : OptimisticLockingFailure: /api/customers/order
+2026-07-31T17:00:07.297+09:00  WARN 45794 --- [skala-shopping] [http-nio-8080-exec-10] c.s.s.exception.GlobalExceptionHandler   : OptimisticLockingFailure: /api/customers/order
+2026-07-31T17:00:07.297+09:00  WARN 45794 --- [skala-shopping] [http-nio-8080-exec-2] c.s.s.exception.GlobalExceptionHandler   : OptimisticLockingFailure: /api/customers/order
+2026-07-31T17:00:07.297+09:00  WARN 45794 --- [skala-shopping] [http-nio-8080-exec-4] c.s.s.exception.GlobalExceptionHandler   : OptimisticLockingFailure: /api/customers/order
+2026-07-31T17:00:07.297+09:00  WARN 45794 --- [skala-shopping] [http-nio-8080-exec-1] c.s.s.exception.GlobalExceptionHandler   : OptimisticLockingFailure: /api/customers/order
+2026-07-31T17:00:07.297+09:00  WARN 45794 --- [skala-shopping] [http-nio-8080-exec-3] c.s.s.exception.GlobalExceptionHandler   : OptimisticLockingFailure: /api/customers/order
+2026-07-31T17:00:07.297+09:00  WARN 45794 --- [skala-shopping] [http-nio-8080-exec-9] c.s.s.exception.GlobalExceptionHandler   : OptimisticLockingFailure: /api/customers/order
+2026-07-31T17:00:07.297+09:00  WARN 45794 --- [skala-shopping] [http-nio-8080-exec-5] c.s.s.exception.GlobalExceptionHandler   : OptimisticLockingFailure: /api/customers/order
+2026-07-31T17:06:20.513+09:00  INFO 46804 --- [skala-shopping] [main] c.s.s.SkalaShoppingApplication           : Starting SkalaShoppingApplication using Java 21.0.11 with PID 46804 (/Users/geunhye/Skala_shop/skala-shopping/build/classes/java/main started by geunhye in /Users/geunhye/Skala_shop/skala-shopping)
+2026-07-31T17:06:20.514+09:00  INFO 46804 --- [skala-shopping] [main] c.s.s.SkalaShoppingApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-07-31T17:06:20.751+09:00  INFO 46804 --- [skala-shopping] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-31T17:06:20.772+09:00  INFO 46804 --- [skala-shopping] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 18 ms. Found 3 JPA repository interfaces.
+2026-07-31T17:06:20.991+09:00  INFO 46804 --- [skala-shopping] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-07-31T17:06:20.998+09:00  INFO 46804 --- [skala-shopping] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-31T17:06:20.998+09:00  INFO 46804 --- [skala-shopping] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-31T17:06:21.018+09:00  INFO 46804 --- [skala-shopping] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 489 ms
+2026-07-31T17:06:21.085+09:00  INFO 46804 --- [skala-shopping] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-31T17:06:21.114+09:00  INFO 46804 --- [skala-shopping] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-31T17:06:21.279+09:00  INFO 46804 --- [skala-shopping] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-31T17:06:21.292+09:00  INFO 46804 --- [skala-shopping] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-31T17:06:21.363+09:00  INFO 46804 --- [skala-shopping] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:shopdb user=SA
+2026-07-31T17:06:21.363+09:00  INFO 46804 --- [skala-shopping] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-31T17:06:21.387+09:00  INFO 46804 --- [skala-shopping] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:shopdb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SHOPDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-31T17:06:22.202+09:00  INFO 46804 --- [skala-shopping] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-31T17:06:22.222+09:00  INFO 46804 --- [skala-shopping] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-31T17:06:22.252+09:00  INFO 46804 --- [skala-shopping] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-31T17:06:22.364+09:00  WARN 46804 --- [skala-shopping] [main] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: be140218-9387-45ee-91fa-59f16ee1f806
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-07-31T17:06:22.367+09:00  INFO 46804 --- [skala-shopping] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-07-31T17:06:22.517+09:00  WARN 46804 --- [skala-shopping] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-07-31T17:06:22.518+09:00  INFO 46804 --- [skala-shopping] [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-31T17:06:22.520+09:00  INFO 46804 --- [skala-shopping] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-07-31T17:06:22.521+09:00  INFO 46804 --- [skala-shopping] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-07-31T17:06:22.525+09:00  INFO 46804 --- [skala-shopping] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-07-31T17:06:22.529+09:00 ERROR 46804 --- [skala-shopping] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2026-07-31T17:06:50.240+09:00  INFO 45794 --- [skala-shopping] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-31T17:06:50.254+09:00  INFO 45794 --- [skala-shopping] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-07-31T17:06:50.261+09:00  INFO 45794 --- [skala-shopping] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-31T17:06:50.271+09:00  INFO 45794 --- [skala-shopping] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-07-31T17:06:50.274+09:00  INFO 45794 --- [skala-shopping] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-07-31T17:06:55.372+09:00  INFO 46902 --- [skala-shopping] [main] c.s.s.SkalaShoppingApplication           : Starting SkalaShoppingApplication using Java 21.0.11 with PID 46902 (/Users/geunhye/Skala_shop/skala-shopping/build/classes/java/main started by geunhye in /Users/geunhye/Skala_shop/skala-shopping)
+2026-07-31T17:06:55.373+09:00  INFO 46902 --- [skala-shopping] [main] c.s.s.SkalaShoppingApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-07-31T17:06:55.592+09:00  INFO 46902 --- [skala-shopping] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-31T17:06:55.613+09:00  INFO 46902 --- [skala-shopping] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17 ms. Found 3 JPA repository interfaces.
+2026-07-31T17:06:55.843+09:00  INFO 46902 --- [skala-shopping] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-07-31T17:06:55.850+09:00  INFO 46902 --- [skala-shopping] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-31T17:06:55.850+09:00  INFO 46902 --- [skala-shopping] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-31T17:06:55.867+09:00  INFO 46902 --- [skala-shopping] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 479 ms
+2026-07-31T17:06:55.931+09:00  INFO 46902 --- [skala-shopping] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-31T17:06:55.955+09:00  INFO 46902 --- [skala-shopping] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-31T17:06:56.097+09:00  INFO 46902 --- [skala-shopping] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-31T17:06:56.109+09:00  INFO 46902 --- [skala-shopping] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-31T17:06:56.167+09:00  INFO 46902 --- [skala-shopping] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:shopdb user=SA
+2026-07-31T17:06:56.168+09:00  INFO 46902 --- [skala-shopping] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-31T17:06:56.191+09:00  INFO 46902 --- [skala-shopping] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:shopdb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SHOPDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-31T17:06:56.565+09:00  INFO 46902 --- [skala-shopping] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-31T17:06:56.585+09:00  INFO 46902 --- [skala-shopping] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-31T17:06:56.613+09:00  INFO 46902 --- [skala-shopping] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-31T17:06:56.741+09:00  WARN 46902 --- [skala-shopping] [main] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 44055594-1ff2-47c3-92a4-99abdacc4422
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-07-31T17:06:56.743+09:00  INFO 46902 --- [skala-shopping] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-07-31T17:06:56.918+09:00  INFO 46902 --- [skala-shopping] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-07-31T17:06:56.920+09:00  INFO 46902 --- [skala-shopping] [main] c.s.s.SkalaShoppingApplication           : Started SkalaShoppingApplication in 1.715 seconds (process running for 1.847)
+2026-07-31T17:06:59.632+09:00  INFO 46902 --- [skala-shopping] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-31T17:06:59.633+09:00  INFO 46902 --- [skala-shopping] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-31T17:06:59.638+09:00  INFO 46902 --- [skala-shopping] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms

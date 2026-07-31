@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 
 @Entity
 @Table(name = "customers")
@@ -23,6 +24,9 @@ public class Customer {
 
     @Column(nullable = false)
     private long point;
+
+    @Version
+    private Long version;
 
     protected Customer() {
     }

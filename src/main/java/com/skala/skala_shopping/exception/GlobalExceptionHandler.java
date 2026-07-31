@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -61,6 +62,18 @@ public class GlobalExceptionHandler {
                         request.getRequestURI()
                 ));
     }
+
+    @ExceptionHandler(ObjectOptimisticLockingFailureException.class)
+        public ResponseEntity<ErrorResponse> handleOptimisticLockException(
+                ObjectOptimisticLockingFailureException exception,
+                HttpServletRequest request
+        ) {
+        // 동시에 같은 데이터를 수정하려다 버전 충돌이 발생한 경우입니다.
+        log.warn("OptimisticLockingFailure: {}", request.getRequestURI());
+        ErrorCode errorCode = ErrorCode.CONCURRENT_UPDATE_CONFLICT;
+        return ResponseEntity.status(errorCode.getStatus())
+                .body(createResponse(errorCode, errorCode.getMessage(), request.getRequestURI()));
+        }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleUnexpectedException(
