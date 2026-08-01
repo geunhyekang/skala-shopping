@@ -37,10 +37,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = authorization.substring(BEARER_PREFIX.length());
             try {
                 String customerId = jwtTokenProvider.getCustomerId(token);
+                // 토큰의 role 클레임을 Spring Security 권한(ROLE_ADMIN/ROLE_CUSTOMER)으로 변환합니다.
+                String role = jwtTokenProvider.getRole(token);
                 var authentication = new UsernamePasswordAuthenticationToken(
                         customerId,
                         null,
-                        List.of(new SimpleGrantedAuthority("ROLE_USER"))
+                        List.of(new SimpleGrantedAuthority("ROLE_" + (role != null ? role : "CUSTOMER")))
                 );
                 // 검증된 고객 ID 를 현재 요청의 인증 정보로 저장합니다.
                 SecurityContextHolder.getContext().setAuthentication(authentication);

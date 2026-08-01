@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(command -v pngquant; command -v sips; python3 -c \"import PIL; print\\(PIL.__version__\\)\" 2>&1 | head -1)"
+    ]
+  }
+}

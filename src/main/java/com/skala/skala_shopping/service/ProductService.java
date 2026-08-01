@@ -1,9 +1,9 @@
 package com.skala.skala_shopping.service;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +11,7 @@ import com.skala.skala_shopping.domain.product.Product;
 import com.skala.skala_shopping.domain.product.ProductRepository;
 import com.skala.skala_shopping.dto.product.ProductRequest;
 import com.skala.skala_shopping.dto.product.ProductResponse;
+import com.skala.skala_shopping.dto.product.ProductUpdateRequest;
 import com.skala.skala_shopping.exception.BusinessException;
 import com.skala.skala_shopping.exception.ErrorCode;
 
@@ -28,10 +29,9 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<ProductResponse> findAll() {
-        return productRepository.findAll().stream()
-                .map(ProductResponse::from)
-                .toList();
+    public Page<ProductResponse> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable)
+                .map(ProductResponse::from);
     }
 
     public ProductResponse findById(Long id) {
@@ -47,9 +47,9 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductResponse update(Long id, ProductRequest request) {
-        log.info("상품 수정: id={}, name={}, price={}", id, request.name(), request.price());
-        Product product = getProduct(id);
+    public ProductResponse update(ProductUpdateRequest request) {
+        log.info("상품 수정: id={}, name={}, price={}", request.id(), request.name(), request.price());
+        Product product = getProduct(request.id());
         product.update(request.name(), request.price());
         return ProductResponse.from(product);
     }

@@ -1,6 +1,10 @@
 spring: #들여쓰기 안 하면 오류뜸 조심하삼~~ 들여쓰기로 계층구조를 표현함 
   application:
     name: skala-shopping
+  data:
+    web:
+      pageable:
+        serialization-mode: via-dto  # Page 응답을 안정적인 JSON 구조(content/page)로 직렬화
   datasource:
     url: jdbc:h2:mem:shopdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver

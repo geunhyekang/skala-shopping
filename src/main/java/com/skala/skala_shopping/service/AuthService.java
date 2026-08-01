@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.skala.skala_shopping.domain.customer.Customer;
 import com.skala.skala_shopping.domain.customer.CustomerRepository;
+import com.skala.skala_shopping.domain.customer.Role;
 import com.skala.skala_shopping.dto.customer.LoginRequest;
 import com.skala.skala_shopping.dto.customer.LoginResponse;
 import com.skala.skala_shopping.dto.customer.SignUpRequest;
@@ -46,7 +47,8 @@ public class AuthService {
         Customer customer = new Customer(
                 request.customerId(),
                 passwordEncoder.encode(request.password()),
-                INITIAL_POINT
+                INITIAL_POINT,
+                request.isAdminSignUp() ? Role.ADMIN : Role.CUSTOMER
         );
         customerRepository.save(customer);
         return new SignUpResponse(
@@ -62,7 +64,8 @@ public class AuthService {
         if (!passwordEncoder.matches(request.password(), customer.getPassword())) {
             throw new BusinessException(ErrorCode.INVALID_CREDENTIALS);
         }
-        String token = jwtTokenProvider.generateToken(customer.getCustomerId());
-        return new LoginResponse(token, "Bearer", expirationMinutes);
+        String token = jwtTokenProvider.generateToken(
+                customer.getCustomerId(), customer.getRole().name());
+        return new LoginResponse(token, "Bearer", expirationMinutes, customer.getRole().name());
     }
 }

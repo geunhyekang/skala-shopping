@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKALA SHOP — 데모</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+    background: #f4f5f7; color: #1f2430; line-height: 1.5;
+  }
+  header {
+    background: #fff; border-bottom: 1px solid #e3e6ec;
+    padding: 0 24px; height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .brand { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+  .brand span { color: #3b6ef5; }
+  .userbox { display: flex; align-items: center; gap: 12px; font-size: 14px; }
+  .point-badge {
+    background: #eef3ff; color: #3b6ef5; font-weight: 700;
+    padding: 4px 12px; border-radius: 999px; font-size: 13px;
+  }
+  main { max-width: 960px; margin: 0 auto; padding: 24px 16px 80px; }
+  nav.tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+  nav.tabs button {
+    border: 1px solid #d9dde5; background: #fff; color: #555e70;
+    padding: 8px 18px; border-radius: 999px; font-size: 14px; font-weight: 600;
+    cursor: pointer;
+  }
+  nav.tabs button.active { background: #1f2430; color: #fff; border-color: #1f2430; }
+  section.view { display: none; }
+  section.view.active { display: block; }
+  .card {
+    background: #fff; border: 1px solid #e3e6ec; border-radius: 12px;
+    padding: 20px; margin-bottom: 16px;
+  }
+  .card h2 { font-size: 16px; margin-bottom: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+  .product {
+    background: #fff; border: 1px solid #e3e6ec; border-radius: 12px; padding: 16px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .product .name { font-weight: 700; cursor: pointer; }
+  .product .name:hover { color: #3b6ef5; text-decoration: underline; }
+  .product .price { color: #3b6ef5; font-weight: 800; font-size: 17px; }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  input, select {
+    border: 1px solid #d9dde5; border-radius: 8px; padding: 8px 10px;
+    font-size: 14px; font-family: inherit;
+  }
+  input:focus { outline: 2px solid #3b6ef5; outline-offset: -1px; }
+  input.qty { width: 64px; }
+  button.btn {
+    border: none; border-radius: 8px; padding: 8px 14px;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    background: #e8eaef; color: #1f2430;
+  }
+  button.btn.primary { background: #3b6ef5; color: #fff; }
+  button.btn.danger  { background: #fdeaea; color: #d33; }
+  button.btn.sm { padding: 5px 10px; font-size: 13px; }
+  button.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid #eef0f4; }
+  th { color: #7a8296; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+  .pager { display: flex; align-items: center; gap: 10px; justify-content: center; margin-top: 16px; font-size: 14px; }
+  .muted { color: #7a8296; font-size: 13px; }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .split { grid-template-columns: 1fr; } }
+  form.stack { display: flex; flex-direction: column; gap: 10px; }
+  #toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: #1f2430; color: #fff; padding: 10px 20px; border-radius: 10px;
+    font-size: 14px; opacity: 0; transition: opacity .25s; pointer-events: none;
+    max-width: 90vw; z-index: 100;
+  }
+  #toast.show { opacity: 1; }
+  #toast.error { background: #c0392b; }
+  .hidden { display: none !important; }
+  .badge-guest { color: #7a8296; font-size: 13px; }
+  .role-badge {
+    background: #fff3e0; color: #c77700; font-weight: 700;
+    padding: 4px 12px; border-radius: 999px; font-size: 13px;
+  }
+  /* role 기반 조건부 렌더링: body 클래스에 따라 노출 여부가 결정됩니다 */
+  body:not(.logged-in) .auth-only { display: none !important; }
+  body:not(.role-ADMIN) .admin-only { display: none !important; }
+  /* 관리자는 구매(주문) 기능을 사용하지 않습니다 */
+  body.role-ADMIN .customer-only { display: none !important; }
+  /* 비로그인 상태에서는 탭 내비게이션을 숨깁니다 (로고 클릭으로 상품 화면 복귀) */
+  body:not(.logged-in) nav.tabs { display: none; }
+  .brand { cursor: pointer; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand" onclick="showView('products')" title="상품 화면으로">SKALA <span>SHOP</span> <small class="muted" style="font-weight:400">demo</small></div>
+  <div class="userbox">
+    <span id="who" class="badge-guest hidden"></span>
+    <span id="roleBadge" class="role-badge hidden"></span>
+    <span id="point" class="point-badge hidden"></span>
+    <button id="authBtn" class="btn sm primary">🔑 로그인 / 가입</button>
+    <button id="logoutBtn" class="btn sm hidden">로그아웃</button>
+  </div>
+</header>
+
+<main>
+  <nav class="tabs">
+    <button data-view="products" class="active">🛍️ 상품</button>
+    <button data-view="orders" class="auth-only customer-only">📦 내 주문</button>
+    <button data-view="customers" class="admin-only">👥 고객 관리</button>
+    <button data-view="settings" class="auth-only">⚙️ 설정</button>
+  </nav>
+
+  <!-- ── 상품 ────────────────────────────── -->
+  <section id="view-products" class="view active">
+    <div class="card admin-only">
+      <h2>상품 등록 / 수정 <span class="muted">(POST · PUT · DELETE /api/products — 관리자 전용)</span></h2>
+      <div class="row">
+        <input id="p-id" placeholder="ID (수정/삭제 시)" style="width:120px">
+        <input id="p-name" placeholder="상품명" style="flex:1;min-width:140px">
+        <input id="p-price" type="number" placeholder="가격" style="width:110px">
+        <button class="btn primary" onclick="createProduct()">등록</button>
+        <button class="btn" onclick="updateProduct()">수정</button>
+        <button class="btn danger" onclick="deleteProduct()">삭제</button>
+      </div>
+    </div>
+    <div id="productGrid" class="grid"></div>
+    <div class="pager">
+      <button class="btn sm" onclick="movePage('product',-1)">← 이전</button>
+      <span id="productPageInfo" class="muted"></span>
+      <button class="btn sm" onclick="movePage('product',1)">다음 →</button>
+    </div>
+  </section>
+
+  <!-- ── 내 주문 ────────────────────────── -->
+  <section id="view-orders" class="view">
+    <div class="card">
+      <h2>내 주문 내역 <span class="muted">(GET /api/customers/me · POST /api/customers/cancel)</span></h2>
+      <div id="orderArea" class="muted">로그인 후 확인할 수 있습니다.</div>
+    </div>
+  </section>
+
+  <!-- ── 설정 ────────────────────────────── -->
+  <section id="view-settings" class="view">
+    <div class="card">
+      <h2>내 정보 <span class="muted">(GET /api/customers/me)</span></h2>
+      <table style="max-width:420px">
+        <tbody id="settings-info">
+          <tr><td class="muted">로그인 후 확인할 수 있습니다.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h2>비밀번호 변경 <span class="muted">(PUT /api/customers — 본인만)</span></h2>
+      <form class="stack" style="max-width:420px" onsubmit="updateMyPassword(event)">
+        <input id="my-new-pw" type="password" placeholder="새 비밀번호 (8~30자)" required>
+        <input id="my-new-pw2" type="password" placeholder="새 비밀번호 확인" required>
+        <button class="btn primary">비밀번호 변경</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ── 고객 관리 ──────────────────────── -->
+  <section id="view-customers" class="view">
+    <div class="card">
+      <h2>고객 검색 <span class="muted">(GET /api/customers/{customerId | customerName})</span></h2>
+      <div class="row">
+        <input id="c-search" placeholder="고객 ID(이름) 또는 숫자 PK" style="flex:1;min-width:160px">
+        <button class="btn primary" onclick="searchCustomer()">검색</button>
+        <span id="c-search-result" class="muted"></span>
+      </div>
+    </div>
+    <div class="card">
+      <h2>비밀번호 변경 <span class="muted">(PUT /api/customers — 관리자는 누구든 변경 가능)</span></h2>
+      <div class="row">
+        <input id="c-upd-id" placeholder="고객 ID" style="width:160px">
+        <input id="c-upd-pw" type="password" placeholder="새 비밀번호 (8자 이상)" style="flex:1;min-width:160px">
+        <button class="btn primary" onclick="updateCustomer()">변경</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>고객 목록 <span class="muted">(GET /api/customers — 페이징)</span></h2>
+      <table>
+        <thead><tr><th>PK</th><th>고객 ID</th><th>역할</th><th>포인트</th><th></th></tr></thead>
+        <tbody id="customerRows"></tbody>
+      </table>
+      <div class="pager">
+        <button class="btn sm" onclick="movePage('customer',-1)">← 이전</button>
+        <span id="customerPageInfo" class="muted"></span>
+        <button class="btn sm" onclick="movePage('customer',1)">다음 →</button>
+      </div>
+      <div id="customerProducts" class="hidden" style="margin-top:14px">
+        <h2 id="cp-title"></h2>
+        <table>
+          <thead><tr><th>상품</th><th>단가</th><th>수량</th><th>합계</th></tr></thead>
+          <tbody id="cp-rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 로그인 / 가입 ───────────────────── -->
+  <section id="view-auth" class="view">
+    <div class="split">
+      <div class="card">
+        <h2>로그인 <span class="muted">(POST /api/customers/login)</span></h2>
+        <form class="stack" onsubmit="login(event)" autocomplete="off">
+          <input id="login-id" placeholder="고객 ID" autocomplete="off" required>
+          <input id="login-pw" type="password" placeholder="비밀번호" autocomplete="new-password" required>
+          <button class="btn primary">로그인</button>
+        </form>
+      </div>
+      <div class="card">
+        <h2>회원가입 <span class="muted">(POST /api/customers)</span></h2>
+        <form class="stack" onsubmit="signup(event)" autocomplete="off">
+          <input id="join-id" placeholder="고객 ID (4~20자)" autocomplete="off" required>
+          <input id="join-pw" type="password" placeholder="비밀번호 (8~30자)" autocomplete="new-password" required>
+          <label style="font-size:14px;display:flex;align-items:center;gap:6px">
+            <input type="checkbox" id="join-admin"> 관리자로 가입
+          </label>
+          <button class="btn primary">가입하기</button>
+        </form>
+        <p class="muted" style="margin-top:10px">가입 시 1,000,000 포인트가 지급됩니다.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="toast"></div>
+
+<script>
+'use strict';
+const PAGE_SIZE = 8;
+const state = {
+  token: localStorage.getItem('token') || null,
+  customerId: localStorage.getItem('customerId') || null,
+  role: localStorage.getItem('role') || null,
+  productPage: 0, productTotalPages: 1,
+  customerPage: 0, customerTotalPages: 1,
+};
+const isAdmin = () => state.role === 'ADMIN';
+
+/* ── 공통 ─────────────────────────────── */
+async function api(path, options = {}) {
+  const headers = { 'Content-Type': 'application/json' };
+  if (state.token) headers['Authorization'] = 'Bearer ' + state.token;
+  const res = await fetch(path, { ...options, headers });
+  if (res.status === 204) return null;
+  const body = await res.json().catch(() => null);
+  if (!res.ok) {
+    if (res.status === 401 && state.token) { clearAuth(); renderAuthState(); }
+    throw new Error(body?.message || `요청 실패 (${res.status})`);
+  }
+  return body;
+}
+function toast(msg, isError = false) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'show' + (isError ? ' error' : '');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.className = '', 2600);
+}
+const won = n => n.toLocaleString('ko-KR') + '원';
+const pt  = n => n.toLocaleString('ko-KR') + ' P';
+const esc = s => String(s).replace(/[&<>"']/g, c =>
+  ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+
+/* ── 탭 ───────────────────────────────── */
+function showView(name) {
+  document.querySelectorAll('nav.tabs button').forEach(b =>
+    b.classList.toggle('active', b.dataset.view === name));
+  document.querySelectorAll('section.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  if (name === 'orders') loadMyOrders();
+  if (name === 'customers') loadCustomers();
+  if (name === 'settings') loadSettings();
+}
+document.querySelectorAll('nav.tabs button').forEach(btn =>
+  btn.onclick = () => showView(btn.dataset.view));
+document.getElementById('authBtn').onclick = () => showView('auth');
+
+/* ── 인증 ─────────────────────────────── */
+function clearAuth() {
+  state.token = null; state.customerId = null; state.role = null;
+  localStorage.removeItem('token');
+  localStorage.removeItem('customerId');
+  localStorage.removeItem('role');
+}
+function renderAuthState() {
+  const who = document.getElementById('who');
+  const roleBadge = document.getElementById('roleBadge');
+  const point = document.getElementById('point');
+  const authBtn = document.getElementById('authBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
+  // body 클래스로 auth-only / admin-only 요소들의 노출을 한 번에 제어합니다.
+  document.body.classList.toggle('logged-in', !!state.token);
+  document.body.classList.toggle('role-ADMIN', isAdmin());
+  if (state.token) {
+    who.textContent = state.customerId + ' 님';
+    who.classList.remove('hidden');
+    roleBadge.textContent = isAdmin() ? '👑 관리자' : '일반 고객';
+    roleBadge.classList.remove('hidden');
+    authBtn.classList.add('hidden');
+    logoutBtn.classList.remove('hidden');
+    // 관리자는 구매 기능을 쓰지 않으므로 포인트를 표시하지 않습니다.
+    if (isAdmin()) point.classList.add('hidden');
+    else refreshPoint();
+  } else {
+    who.classList.add('hidden');
+    roleBadge.classList.add('hidden');
+    point.classList.add('hidden');
+    authBtn.classList.remove('hidden');
+    logoutBtn.classList.add('hidden');
+  }
+  // 로그아웃/권한 변경으로 현재 화면 접근 권한이 사라졌으면 상품 화면으로 돌립니다.
+  const activeView = document.querySelector('section.view.active')?.id;
+  if ((activeView === 'view-customers' && !isAdmin()) ||
+      (activeView === 'view-orders' && (!state.token || isAdmin())) ||
+      (activeView === 'view-settings' && !state.token)) {
+    showView('products');
+  }
+}
+async function refreshPoint() {
+  if (!state.token) return;
+  try {
+    const me = await api('/api/customers/me');
+    const point = document.getElementById('point');
+    point.textContent = pt(me.point);
+    point.classList.remove('hidden');
+  } catch (e) { /* 토큰 만료 등은 api()에서 처리 */ }
+}
+async function signup(e) {
+  e.preventDefault();
+  try {
+    const body = {
+      customerId: val('join-id'),
+      password: val('join-pw'),
+      admin: document.getElementById('join-admin').checked,
+    };
+    const res = await api('/api/customers', { method: 'POST', body: JSON.stringify(body) });
+    toast(`${res.message} (지급 포인트: ${pt(res.initialPoint)})${body.admin ? ' — 관리자 계정' : ''}`);
+    document.getElementById('login-id').value = body.customerId;
+  } catch (err) { toast(err.message, true); }
+}
+async function login(e) {
+  e.preventDefault();
+  try {
+    const id = val('login-id');
+    const res = await api('/api/customers/login', {
+      method: 'POST',
+      body: JSON.stringify({ customerId: id, password: val('login-pw') }),
+    });
+    state.token = res.accessToken; state.customerId = id; state.role = res.role;
+    localStorage.setItem('token', state.token);
+    localStorage.setItem('customerId', id);
+    localStorage.setItem('role', state.role);
+    renderAuthState();
+    toast(`${id} 님, 환영합니다!`);
+    showView('products');
+  } catch (err) { toast(err.message, true); }
+}
+document.getElementById('logoutBtn').onclick = () => {
+  clearAuth(); renderAuthState(); toast('로그아웃되었습니다.');
+};
+const val = id => document.getElementById(id).value.trim();
+
+/* ── 상품 ─────────────────────────────── */
+async function loadProducts() {
+  try {
+    const page = await api(`/api/products?page=${state.productPage}&size=${PAGE_SIZE}&sort=id,asc`);
+    state.productTotalPages = Math.max(page.page.totalPages, 1);
+    document.getElementById('productPageInfo').textContent =
+      `${page.page.number + 1} / ${state.productTotalPages} 페이지 · 총 ${page.page.totalElements}개`;
+    const grid = document.getElementById('productGrid');
+    grid.innerHTML = page.content.map(p => `
+      <div class="product">
+        <div class="name" onclick="showProduct(${p.id})" title="상세 보기">#${p.id} ${esc(p.name)}</div>
+        <div class="price">${won(p.price)}</div>
+        <div class="row">
+          <input class="qty customer-only" type="number" min="1" value="1" id="qty-${p.id}">
+          <button class="btn primary sm customer-only" onclick="order(${p.id})">주문</button>
+          <button class="btn sm admin-only" onclick="fillProductForm(${p.id}, '${esc(p.name).replace(/'/g, "\\'")}', ${p.price})">✎</button>
+        </div>
+      </div>`).join('') || '<p class="muted">등록된 상품이 없습니다.</p>';
+  } catch (err) { toast(err.message, true); }
+}
+async function showProduct(id) {
+  try {
+    const p = await api('/api/products/' + id);
+    toast(`[상세] #${p.id} ${p.name} — ${won(p.price)}`);
+  } catch (err) { toast(err.message, true); }
+}
+function fillProductForm(id, name, price) {
+  document.getElementById('p-id').value = id;
+  document.getElementById('p-name').value = name;
+  document.getElementById('p-price').value = price;
+}
+async function createProduct() {
+  try {
+    const p = await api('/api/products', {
+      method: 'POST',
+      body: JSON.stringify({ name: val('p-name'), price: Number(val('p-price')) }),
+    });
+    toast(`상품 등록 완료: #${p.id} ${p.name}`);
+    loadProducts();
+  } catch (err) { toast(err.message, true); }
+}
+async function updateProduct() {
+  try {
+    const p = await api('/api/products', {
+      method: 'PUT',
+      body: JSON.stringify({ id: Number(val('p-id')), name: val('p-name'), price: Number(val('p-price')) }),
+    });
+    toast(`상품 수정 완료: #${p.id} ${p.name}`);
+    loadProducts();
+  } catch (err) { toast(err.message, true); }
+}
+async function deleteProduct() {
+  const id = Number(val('p-id'));
+  if (!id) return toast('삭제할 상품 ID를 입력하세요.', true);
+  if (!confirm(`상품 #${id} 을(를) 삭제할까요?`)) return;
+  try {
+    await api('/api/products', { method: 'DELETE', body: JSON.stringify({ id }) });
+    toast(`상품 #${id} 삭제 완료`);
+    loadProducts();
+  } catch (err) { toast(err.message, true); }
+}
+
+/* ── 주문 ─────────────────────────────── */
+async function order(productId) {
+  if (!state.token) { toast('로그인 후 주문할 수 있습니다.', true); return; }
+  const quantity = Number(document.getElementById('qty-' + productId).value);
+  try {
+    const res = await api('/api/customers/order', {
+      method: 'POST',
+      body: JSON.stringify({ productId, quantity }),
+    });
+    toast(`${res.message} ${res.productName} × ${res.quantity} (잔여 ${pt(res.remainingPoint)})`);
+    refreshPoint();
+  } catch (err) { toast(err.message, true); }
+}
+async function loadMyOrders() {
+  const area = document.getElementById('orderArea');
+  if (!state.token) { area.innerHTML = '<span class="muted">로그인 후 확인할 수 있습니다.</span>'; return; }
+  try {
+    const me = await api('/api/customers/me');
+    if (!me.orders.length) { area.innerHTML = '<span class="muted">주문 내역이 없습니다.</span>'; return; }
+    area.innerHTML = `
+      <table>
+        <thead><tr><th>상품</th><th>단가</th><th>수량</th><th>합계</th><th>취소</th></tr></thead>
+        <tbody>${me.orders.map(o => `
+          <tr>
+            <td>#${o.productId} ${esc(o.productName)}</td>
+            <td>${won(o.unitPrice)}</td>
+            <td>${o.quantity}</td>
+            <td>${won(o.totalPrice)}</td>
+            <td class="row">
+              <input class="qty" type="number" min="1" max="${o.quantity}" value="1" id="cancel-qty-${o.productId}">
+              <button class="btn danger sm" onclick="cancelOrder(${o.productId})">취소</button>
+            </td>
+          </tr>`).join('')}
+        </tbody>
+      </table>`;
+  } catch (err) { area.innerHTML = `<span class="muted">${esc(err.message)}</span>`; }
+}
+async function cancelOrder(productId) {
+  const quantity = Number(document.getElementById('cancel-qty-' + productId).value);
+  try {
+    const res = await api('/api/customers/cancel', {
+      method: 'POST',
+      body: JSON.stringify({ productId, quantity }),
+    });
+    toast(`${res.message} (잔여 ${pt(res.remainingPoint)})`);
+    refreshPoint(); loadMyOrders();
+  } catch (err) { toast(err.message, true); }
+}
+
+/* ── 고객 관리 ────────────────────────── */
+async function loadCustomers() {
+  const rows = document.getElementById('customerRows');
+  if (!state.token) { rows.innerHTML = '<tr><td colspan="5" class="muted">로그인 후 확인할 수 있습니다.</td></tr>'; return; }
+  try {
+    const page = await api(`/api/customers?page=${state.customerPage}&size=${PAGE_SIZE}&sort=id,asc`);
+    state.customerTotalPages = Math.max(page.page.totalPages, 1);
+    document.getElementById('customerPageInfo').textContent =
+      `${page.page.number + 1} / ${state.customerTotalPages} 페이지 · 총 ${page.page.totalElements}명`;
+    rows.innerHTML = page.content.map(c => `
+      <tr>
+        <td>${c.id}</td>
+        <td>${esc(c.customerId)}</td>
+        <td>${c.role === 'ADMIN' ? '👑 관리자' : '고객'}</td>
+        <td>${pt(c.point)}</td>
+        <td class="row">
+          <button class="btn sm" onclick="showCustomerProducts('${esc(c.customerId)}')">주문 보기</button>
+          <button class="btn danger sm" onclick="deleteCustomer('${esc(c.customerId)}')">삭제</button>
+        </td>
+      </tr>`).join('') || '<tr><td colspan="5" class="muted">고객이 없습니다.</td></tr>';
+  } catch (err) { rows.innerHTML = `<tr><td colspan="5" class="muted">${esc(err.message)}</td></tr>`; }
+}
+async function searchCustomer() {
+  const out = document.getElementById('c-search-result');
+  try {
+    const c = await api('/api/customers/' + encodeURIComponent(val('c-search')));
+    out.textContent = `→ PK ${c.id} · ${c.customerId} · ${c.role === 'ADMIN' ? '관리자' : '고객'} · ${pt(c.point)}`;
+  } catch (err) { out.textContent = '→ ' + err.message; }
+}
+async function loadSettings() {
+  if (!state.token) return;
+  try {
+    const me = await api('/api/customers/me');
+    // 관리자는 구매 기능이 없으므로 포인트/주문 정보를 표시하지 않습니다.
+    document.getElementById('settings-info').innerHTML = `
+      <tr><th style="width:120px">고객 ID</th><td>${esc(me.customerId)}</td></tr>
+      <tr><th>역할</th><td>${isAdmin() ? '👑 관리자' : '일반 고객'}</td></tr>` +
+      (isAdmin() ? '' : `
+      <tr><th>보유 포인트</th><td>${pt(me.point)}</td></tr>
+      <tr><th>주문 상품 수</th><td>${me.orders.length}종</td></tr>`);
+  } catch (err) { toast(err.message, true); }
+}
+async function updateMyPassword(e) {
+  e.preventDefault();
+  if (val('my-new-pw') !== val('my-new-pw2')) {
+    return toast('새 비밀번호가 서로 일치하지 않습니다.', true);
+  }
+  try {
+    await api('/api/customers', {
+      method: 'PUT',
+      body: JSON.stringify({ customerId: state.customerId, password: val('my-new-pw') }),
+    });
+    toast('비밀번호가 변경되었습니다.');
+    document.getElementById('my-new-pw').value = '';
+    document.getElementById('my-new-pw2').value = '';
+  } catch (err) { toast(err.message, true); }
+}
+async function updateCustomer() {
+  try {
+    const c = await api('/api/customers', {
+      method: 'PUT',
+      body: JSON.stringify({ customerId: val('c-upd-id'), password: val('c-upd-pw') }),
+    });
+    toast(`${c.customerId} 님의 비밀번호가 변경되었습니다.`);
+    document.getElementById('c-upd-pw').value = '';
+  } catch (err) { toast(err.message, true); }
+}
+async function deleteCustomer(customerId) {
+  if (!confirm(`고객 '${customerId}' 을(를) 삭제할까요? 주문 내역도 함께 삭제됩니다.`)) return;
+  try {
+    await api('/api/customers/' + encodeURIComponent(customerId), { method: 'DELETE' });
+    toast(`고객 '${customerId}' 삭제 완료`);
+    if (customerId === state.customerId) { clearAuth(); renderAuthState(); }
+    loadCustomers();
+  } catch (err) { toast(err.message, true); }
+}
+async function showCustomerProducts(customerId) {
+  try {
+    const res = await api('/api/customers/' + encodeURIComponent(customerId) + '/products');
+    document.getElementById('customerProducts').classList.remove('hidden');
+    document.getElementById('cp-title').textContent =
+      `'${res.customerId}' 님의 주문 상품 (보유 ${pt(res.point)})`;
+    document.getElementById('cp-rows').innerHTML = res.orders.map(o => `
+      <tr>
+        <td>#${o.productId} ${esc(o.productName)}</td>
+        <td>${won(o.unitPrice)}</td>
+        <td>${o.quantity}</td>
+        <td>${won(o.totalPrice)}</td>
+      </tr>`).join('') || '<tr><td colspan="4" class="muted">주문 내역이 없습니다.</td></tr>';
+  } catch (err) { toast(err.message, true); }
+}
+
+/* ── 페이징 ───────────────────────────── */
+function movePage(kind, delta) {
+  if (kind === 'product') {
+    const next = state.productPage + delta;
+    if (next < 0 || next >= state.productTotalPages) return;
+    state.productPage = next; loadProducts();
+  } else {
+    const next = state.customerPage + delta;
+    if (next < 0 || next >= state.customerTotalPages) return;
+    state.customerPage = next; loadCustomers();
+  }
+}
+
+/* ── 초기화 ───────────────────────────── */
+function clearAuthForms() {
+  ['login-id', 'login-pw', 'join-id', 'join-pw'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('join-admin').checked = false;
+}
+renderAuthState();
+loadProducts();
+// 페이지 진입 시 로그인/가입 입력값을 항상 비웁니다.
+// 브라우저가 새로고침/뒤로가기 시 폼 값을 늦게 복원하는 경우가 있어 한 번 더 지웁니다.
+clearAuthForms();
+setTimeout(clearAuthForms, 200);
+window.addEventListener('pageshow', clearAuthForms);
+</script>
+</body>
+</html>

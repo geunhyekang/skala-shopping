@@ -27,10 +27,11 @@ public class JwtTokenProvider {
         this.expirationMillis = Duration.ofMinutes(expirationMinutes).toMillis();
     }
 
-    public String generateToken(String customerId) {
+    public String generateToken(String customerId, String role) {
         Instant now = Instant.now();
         return Jwts.builder()
                 .subject(customerId)
+                .claim("role", role)
                 .issuedAt(Date.from(now))
                 .expiration(Date.from(now.plusMillis(expirationMillis)))
                 .signWith(secretKey)
@@ -39,11 +40,18 @@ public class JwtTokenProvider {
 
     public String getCustomerId(String token) {
         // 서명과 만료 시간을 검증한 뒤 subject 에 저장된 고객 ID 를 반환합니다.
+        return parseClaims(token).getSubject();
+    }
+
+    public String getRole(String token) {
+        return parseClaims(token).get("role", String.class);
+    }
+
+    private io.jsonwebtoken.Claims parseClaims(String token) {
         return Jwts.parser()
                 .verifyWith(secretKey)
                 .build()
                 .parseSignedClaims(token)
-                .getPayload()
-                .getSubject();
+                .getPayload();
     }
 }
